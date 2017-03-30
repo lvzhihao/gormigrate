@@ -35,16 +35,16 @@ func init() {
 	m = gormigrate.New(db, gormigrate.DefaultOptions)
 }
 
-func TestMigrateUp(t *testing.T) {
-	m.AddMigration(createTable)
-	m.Migrate()
-}
-
-func TestLastVersion(t *testing.T) {
+func Test_001_LastVersion(t *testing.T) {
 	v, e := m.GetLastVersion()
 	if e != nil {
 		t.Error(e)
 	} else {
 		t.Log("LastVersion:", v)
 	}
+}
+
+func Test_002_MigrateUp(t *testing.T) {
+	m.AddMigration(createTable)
+	m.Migrate()
 }
